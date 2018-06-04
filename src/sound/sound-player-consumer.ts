@@ -7,6 +7,16 @@ export class SoundPlayerConsumer {
         this.soundPlayer = new SoundPlayer();
     }
 
+
+
+
+
+
+
+
+
+    
+
     public playSomethingCool() {
         const coolSoundFileName = 'song.mp3';
         this.soundPlayer.playSoundFile(coolSoundFileName);

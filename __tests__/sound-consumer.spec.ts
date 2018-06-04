@@ -9,7 +9,8 @@ beforeEach(() => {
 });
 
 it("We can check if the consumer called the class constructor", () => {
-  const soundPlayerConsumer = new SoundPlayerConsumer();
+  let soundPlayerConsumer = new SoundPlayerConsumer();
+  //soundPlayerConsumer.playSomethingCool();
   expect(s).toHaveBeenCalledTimes(1);
 });
 
@@ -24,10 +25,12 @@ it("We can check if the consumer called a method on the class instance", () => {
   const coolSoundFileName = "song.mp3";
   soundPlayerConsumer.playSomethingCool();
 
+  s = SoundPlayer as jest.Mock<SoundPlayer>;
   // mock.instances is available with automatic mocks:
   const mockSoundPlayerInstance = s.mock.instances[0];
   const mockPlaySoundFile = mockSoundPlayerInstance.playSoundFile;
-  expect(mockPlaySoundFile.mock.calls[0][0]).toEqual(coolSoundFileName);
+  let m = soundPlayerConsumer["soundPlayer"].playSoundFile as jest.Mock;
+  expect(m.calls[0][0]).toEqual(coolSoundFileName);
   // Equivalent to above check:
   expect(mockPlaySoundFile).toHaveBeenCalledWith(coolSoundFileName);
   expect(mockPlaySoundFile).toHaveBeenCalledTimes(1);
